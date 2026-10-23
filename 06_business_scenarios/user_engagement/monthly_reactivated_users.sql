@@ -14,6 +14,20 @@ Exclude users who logged in during the immediately preceding calendar month.
 Exclude first-time users with no earlier login history.
 Calculate monthly reactivated-user counts.
 Account for both month and year when analyzing login activity.
+
+Business Value
+Monitors monthly user reactivation trends.
+Identifies users returning after periods of inactivity.
+Supports operational reporting and engagement analysis.
+Demonstrates how SQL can translate business requirements into measurable metrics.
+
+SQL Concepts Demonstrated
+DATE_TRUNC(): Groups login activity by calendar month and year.
+INTERVAL: Calculates the previous calendar month.
+EXISTS: Verifies that a user has login history before the current month.
+NOT EXISTS: Identifies users with no login activity during the immediately preceding month.
+COUNT(DISTINCT): Counts each user only once per month.
+GROUP BY and ORDER BY: Aggregate and sort monthly results.
 *************************************************************************/
 
 SELECT
