@@ -1,4 +1,4 @@
-# Real-World SQL Practice
+# Real-World-SQL-Scenarios
 
 ## Project Overview
 This repository contains practical SQL problems and solutions based on real-world business scenarios. The goal is to demonstrate SQL skills used in data analysis, reporting, database development, data quality validation, and production support.
@@ -10,7 +10,7 @@ This repository contains practical SQL problems and solutions based on real-worl
 - Window functions and ranking
 - Data quality checks and duplicate detection
 - Payment and claims reconciliation
-- Business reporting and trend analysis
+- Business reporting/scenarios and trend analysis
 - Database troubleshooting
 
 ## Tools & Technologies
@@ -24,5 +24,5 @@ This repository contains practical SQL problems and solutions based on real-worl
 - `03_window_functions/` — Ranking and analytical functions
 - `04_data_quality/` — Data validation and exception reporting
 - `05_payment_reconciliation/` — Payment matching and reconciliation
-- `06_business_reporting/` — Business metrics and reporting
+- `06_business_scenarios/` — Business metrics and reporting
 - `sample_data/` — Practice tables and sample records
