@@ -1,16 +1,20 @@
-/*Monthly Reactivated Users Analysis
+/*********************************************************
+Monthly Reactivated Users Analysis
+
 Business Scenario
 Needs to monitor user engagement with the System. This SQL analysis identifies previously active users who return to the system after having no login activity during the immediately preceding month.
 
 Objective: Calculate the number of monthly reactivated users to support operational reporting and user engagement analysis.
 
 Note: This is a hypothetical portfolio use case using sample data.
+
 Business Requirements
 Identify users who return after a period of inactivity.
 Exclude users who logged in during the immediately preceding calendar month.
 Exclude first-time users with no earlier login history.
 Calculate monthly reactivated-user counts.
-Account for both month and year when analyzing login activity.*/
+Account for both month and year when analyzing login activity.
+*************************************************************************/
 
 SELECT
     DATE_TRUNC('month', curr_month.login_date)::DATE AS login_month,
