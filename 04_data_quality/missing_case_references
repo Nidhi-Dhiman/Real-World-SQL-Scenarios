@@ -1,0 +1,87 @@
+/***************************************************************************************************************************************
+Scenario 5: Invalid business values
+
+Business problem: To identify payment records with missing or invalid case references, missing participant information, invalid payment amounts, and unsupported payment statuses.
+
+SQL skills: WHERE, CASE, null checks, validation rules
+
+Business value: Improves the reliability of downstream reporting.
+*************************************************************************************************************************************/
+
+SELECT
+    p.payment_id,
+    p.case_id,
+    c.participant_id,
+    pt.participant_name,
+    p.payment_amount,
+    p.payment_status,
+    d.disbursement_id,
+    d.disbursement_amount,
+
+    CASE
+        WHEN p.case_id IS NULL
+            THEN 'Missing Case ID'
+
+        WHEN c.case_id IS NULL
+            THEN 'Invalid Case Reference'
+
+        WHEN c.participant_id IS NULL
+            THEN 'Missing Participant ID'
+
+        WHEN pt.participant_id IS NULL
+            THEN 'Invalid Participant Reference'
+
+        WHEN p.payment_amount IS NULL
+            THEN 'Missing Payment Amount'
+
+        WHEN p.payment_amount < 0
+            THEN 'Negative Payment Amount'
+
+        WHEN p.payment_status IS NULL
+            THEN 'Missing Payment Status'
+
+        WHEN p.payment_status NOT IN
+             ('PENDING', 'PROCESSED', 'FAILED', 'CANCELLED')
+            THEN 'Invalid Payment Status'
+
+        WHEN d.disbursement_id IS NOT NULL
+             AND d.disbursement_amount IS NULL
+            THEN 'Missing Disbursement Amount'
+
+        WHEN d.disbursement_amount < 0
+            THEN 'Negative Disbursement Amount'
+
+        ELSE 'Valid'
+    END AS data_quality_issue
+
+FROM payments p
+
+LEFT JOIN cases c
+    ON p.case_id = c.case_id
+
+LEFT JOIN participants pt
+    ON c.participant_id = pt.participant_id
+
+LEFT JOIN disbursements d
+    ON p.payment_id = d.payment_id
+
+WHERE p.case_id IS NULL
+   OR c.case_id IS NULL
+   OR c.participant_id IS NULL
+   OR pt.participant_id IS NULL
+   OR p.payment_amount IS NULL
+   OR p.payment_amount < 0
+   OR p.payment_status IS NULL
+   OR p.payment_status NOT IN
+      ('PENDING', 'PROCESSED', 'FAILED', 'CANCELLED')
+   OR (
+       d.disbursement_id IS NOT NULL
+       AND (
+           d.disbursement_amount IS NULL
+           OR d.disbursement_amount < 0
+       )
+   )
+
+ORDER BY p.payment_id;
+
+Business question: Are payments missing a case identifier or referencing a case that does not exist?
