@@ -1,0 +1,14 @@
+/*********************************************************************
+Orphaned records
+
+Business problem: Payment allocations reference payments that do not exist, or transactions reference invalid case IDs.
+
+SQL skills: LEFT JOIN, NOT EXISTS
+
+Business value: Detects broken relationships between operational tables.
+**************************************************************************************************/
+SELECT pa.*
+FROM payment_allocations pa
+LEFT JOIN payments p
+    ON pa.payment_id = p.payment_id
+WHERE p.payment_id IS NULL;
