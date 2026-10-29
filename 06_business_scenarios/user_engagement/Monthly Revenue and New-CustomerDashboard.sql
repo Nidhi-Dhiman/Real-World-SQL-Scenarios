@@ -3,6 +3,8 @@ Build a monthly dashboard from orders: revenue, order_count, new_customers (cust
 Round growth to 2 decimals (NULL in the first month).
 
 Output columns: month, revenue, order_count, new_customers, mom_growth_pct
+
+Advanced SQL: CTEs, date functions (DATE_TRUNC), window functions (LAG), NULL handling (COALESCE), joins, aggregations, and monthly reporting.
 ****************************************************************************/
 WITH monthly AS 
 (SELECT 
